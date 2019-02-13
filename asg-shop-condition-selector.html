@@ -1,0 +1,72 @@
+
+<style>
+
+  :host {
+    border-radius:    8px;
+    background-color: var(--dark-muted-color, var(--app-dark-color));
+    transition:       transform 0.2s var(--spriteful-ease, cubic-bezier(0.49, 0.01, 0, 1)), opacity 0.1s ease-in;
+    color:            white;
+    position:         absolute;
+    top:              0px;
+    right:            0px;
+    bottom:           0px;
+    left:             0px;
+    padding:          8px;
+    opacity:          0;
+  }
+
+  #condition-selector {
+    display:         flex;
+    flex-direction:  column;
+    justify-content: space-between;
+    height:          100%;
+  }
+
+  #condition-selector .iron-selected {
+    background-color: var(--muted-color, var(--app-primary-color));
+  }
+
+  .condition-selector-selectable {
+    display:         flex;
+    justify-content: space-between;
+    border-radius:   4px;
+    padding:         4px 8px;
+  }
+
+  .condition-selector-selectable[disabled] {
+    color: var(--disabled-text-color);
+  }
+
+</style>
+
+
+<iron-selector id="condition-selector"
+               selected="[[selected]]"
+               attr-for-selected="name" 
+               on-selected-changed="__conditionSelectedChanged"
+               on-click="__conditionClicked">
+  <div class="condition-selector-selectable"
+       name="Near Mint" 
+       disabled$="[[__computeConditionDisabled(card, foil, 'Near Mint')]]">
+    <div>Near Mint</div>
+    <div>[[__computeCondPrice(card, foil, 'Near Mint')]]</div>
+  </div>
+  <div class="condition-selector-selectable"
+       name="Lightly Played" 
+       disabled$="[[__computeConditionDisabled(card, foil, 'Lightly Played')]]">
+    <div>Lightly Played</div>
+    <div>[[__computeCondPrice(card, foil, 'Lightly Played')]]</div>
+  </div>
+  <div class="condition-selector-selectable"
+       name="Moderately Played" 
+       disabled$="[[__computeConditionDisabled(card, foil, 'Moderately Played')]]">
+    <div>Moderately Played</div>
+    <div>[[__computeCondPrice(card, foil, 'Moderately Played')]]</div>
+  </div>
+  <div class="condition-selector-selectable"
+       name="Heavily Played" 
+       disabled$="[[__computeConditionDisabled(card, foil, 'Heavily Played')]]">
+    <div>Heavily Played</div>
+    <div>[[__computeCondPrice(card, foil, 'Heavily Played')]]</div>
+  </div>
+</iron-selector>

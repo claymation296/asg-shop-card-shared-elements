@@ -1,0 +1,71 @@
+
+<style>
+
+	:host {
+		display: block;
+	}
+
+	.name {
+		display: 		 inline-flex;
+		align-items: center;
+		width: 			 100%;
+	}
+
+	.name-text {		
+		@apply --single-line-truncate-mixin;
+	}
+
+	.icon {
+		min-width: 		var(--icon-size, 24px);	
+		width: 	 			var(--icon-size, 24px);
+		height: 	 		var(--icon-size, 24px);
+		margin-right: 4px;
+	}
+
+	.icon[hidden] {
+		display: none;
+	}
+
+	
+	.rarity-wrapper {
+		display: 		 flex;
+		align-items: var(--rarity-wrapper-align, flex-end);
+		margin-top: -4px;
+		font-size: 	 var(--rarity-text-size, 14px);
+	}
+
+	.common {
+	  color: #1A1718;
+	}
+
+	.uncommon {
+	  color: #707883;
+	}
+
+	.rare {
+	  color: #A58E4A;
+	}
+
+	.mythic {
+	  color: #BF4427;
+	}
+
+	.timeshifted {
+	  color: #652978;
+	}
+
+</style>
+
+
+<div class="name">      
+	<iron-icon id="setIcon" 
+						 class="icon" 
+						 hidden="[[_hideIronIcon]]" 
+						 icon="[[_setIcon]]">
+	</iron-icon>
+	<span class="name-text">[[card.set_name]]</span>
+</div>
+<div class$="[[__computeRarityColor(card.rarity, isWhite)]] rarity-wrapper">
+	<iron-icon class="icon" icon="asg-icons:diamond"></iron-icon>
+	<span class="text">[[__computeRarityText(card.rarity)]]</span>
+</div>

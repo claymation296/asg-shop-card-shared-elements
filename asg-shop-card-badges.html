@@ -1,0 +1,44 @@
+
+<style>
+
+	:host {
+		display: 				 flex;
+		flex-direction:  column;
+		flex-wrap: 			 wrap-reverse;
+		justify-content: flex-end;
+		position:  			 absolute;
+		top: 						 4px;
+		right: 				  -6px;
+		bottom: 				 4px;
+		pointer-events:  none;
+		--accent-color:  var(--vibrant-color, var(--muted-color, var(--app-accent-color)));
+		--light-color:   var(--light-vibrant-color, var(--light-muted-color, var(--app-background-color)));
+		--accent-text:   var(--vibrant-title-color, var(--muted-title-color, white));
+		--dark-text:     var(--light-vibrant-title-color, var(--light-muted-title-color, var(--dark-text-color)));
+	}
+
+  .badge {
+  	height: 					20px;
+  	width: 						32px;
+  	margin-left: 			4px;
+  	margin-bottom: 		4px;
+  	pointer-events: 	none;
+  	border-radius: 		10px;
+  	font-size: 				10px;
+    text-align: 			center;
+    line-height: 			2;
+  	color: 						var(--accent-text);
+  	background-color: var(--accent-color);
+  }
+
+  .foil {
+  	color: 						var(--dark-text);
+  	background-color: var(--light-color);
+  }
+
+</style>
+
+
+<template is="dom-repeat" items="[[_badges]]">
+	<div class$="badge [[item.foilStr]]">[[item.text]]</div>
+</template>
