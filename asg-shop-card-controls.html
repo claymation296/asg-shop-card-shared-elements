@@ -1,0 +1,306 @@
+
+<style>
+
+  :host {
+    display:             block;
+    --light-color:       var(--light-vibrant-color, var(--light-muted-color, var(--app-background-color)));
+    --dark-color:        var(--dark-vibrant-color, var(--dark-muted-color, var(--app-dark-color)));
+    --dark-fallback-rgb: 33, 33, 33;
+    --dark-rgba-color:   rgba(var(--dark-vibrant-rgb, var(--dark-muted-rgb, var(--dark-fallback-rgb))), 0.3);
+    --accent-color:      var(--vibrant-color, var(--muted-color, var(--app-accent-color)));
+    --light-text:        var(--dark-vibrant-title-color, var(--dark-muted-title-color, var(--light-text-color)));
+    --dark-text:         var(--light-vibrant-body-color, var(--light-muted-body-color, var(--dark-text-color)));
+    --accent-text:       var(--vibrant-title-color, var(--muted-title-color, white));
+  }
+ 
+  .controls {
+    position: relative;
+    padding:  var(--controls-padding, 16px);
+    color:    var(--dark-color);
+  }
+
+  #background {
+    position: absolute;
+    top:      0px;
+    left:     0px;
+    height:   100%;
+    width:    100%;
+  }
+
+  .heading {
+    font-size:   20px;
+    font-weight: bold;
+    color:       var(--dark-color);
+  }
+
+  .condition-btn-and-price {
+    display:         flex;
+    justify-content: space-between;
+    align-content:   center;
+    padding-bottom:  8px;
+  }
+
+  .condition-btn-wrapper {
+    position: relative;
+    height:   40px;
+  }
+
+  .price {
+    background-color: white;
+    border-radius:    20px;
+    padding:          5px;
+    transition-delay: 0.05s;
+  }
+
+  .inline-vertical-center {
+    display:     inline-flex;
+    align-items: center;
+  }
+
+  .icon-text {
+    margin-left: 16px;
+  }
+
+  .foilToggle {
+    height:  40px;
+    width:   88px;
+    z-index: 1; /* ensure click events are not consumed by the paper-input-container below the toggle */
+    --paper-toggle-button-unchecked-button-color: var(--light-text);
+    --paper-toggle-button-checked-bar-color:      var(--dark-color);
+    --paper-toggle-button-checked-button-color:   var(--dark-color);
+    --paper-toggle-button-checked-ink-color:      var(--dark-color);
+    --paper-toggle-button-label-color:            var(--dark-color);
+    --paper-toggle-button-label-spacing:          16px;
+  }
+
+  .foilToggle[checked] {
+    font-weight: bold;
+  }
+
+  .qty-wrapper {
+    display:        flex;
+    align-items:    center;
+    position:       relative;
+    height:         40px;    
+    color:          var(--dark-color);
+    padding-bottom: 8px;
+  }
+
+  #qtyNotAvail {
+    padding: var(--not-available-padding, 10px 0px 0px 8px);
+  }
+
+  .hide-transition {    
+    transition: transform 0.3s var(--spriteful-ease, ease-out), opacity 0.2s ease-in;
+    opacity:    1;
+  }
+
+  .disabled {
+    opacity: 0.5;
+  }
+
+  .qty-input-container {
+    display:     flex;
+    align-items: center;
+    position:    absolute;
+    top:         0px;
+    right:       0px;
+    bottom:      0px;
+    left:        0px;    
+  }
+
+  .qty {
+    position: relative;
+    top:     -8px;
+    --paper-input-container: {
+      width: 40px;
+    };
+    --paper-input-container-focus-color: var(--dark-color);
+    --paper-input-container-underline-focus: { /* broken paper-input fix (3.0.0-pre.1) */
+      transition: transform 0.25s ease-in-out;
+      width:      40px;
+    };
+    --paper-input-container-underline: {
+      display: none;
+    };
+    --paper-input-container: {
+      padding: 0px;
+    };
+    --paper-input-container-label: {
+      display: none;
+    };
+    --paper-input-container-input: {
+      width:      40px;
+      text-align: center;
+      color:      var(--dark-color);
+    };
+    --paper-input-suffix: {
+      font-size:   14px;
+      white-space: nowrap;
+      text-align:  start;
+      color:       var(--dark-color);
+    };
+  }
+
+  #condition {
+    /* make sure to cover toggle button which must also have z-index: 1 set */
+    z-index: 1; 
+  }
+
+  paper-icon-button {
+    background-color: white;
+    border-radius:    50%;
+  }
+  
+  .controls.search {
+    height:  160px;
+    padding: 0px 0px 0px 8px;
+  }
+
+  .heading.search {
+    padding: 0px;
+  }
+
+  .condition-btn-and-price.search {
+    padding-bottom: 0px;
+    margin-left:   -8px;
+  }
+
+  .condition-btn-wrapper.search {
+    width: calc(100% - 115px);
+  }
+
+  .price.search {
+    position:  absolute;
+    bottom:    6px;
+    left:      8px;
+    font-size: 16px
+  }
+
+  .icon-text.search {
+    margin-left: 0px;
+    @apply --single-line-truncate-mixin;
+  }
+
+  .foilToggle.search {
+    --paper-toggle-button-label-spacing: 4px;
+  }
+  
+  .qty-wrapper.search {
+    margin-left: -8px;
+  }
+
+  .qty.search {
+    margin-left: -16px
+  }
+
+  paper-icon-button.search {
+    left: -8px;
+  }
+
+  .slide-up {
+    transition: transform 0.3s var(--spriteful-ease, ease-out), opacity 0.2s ease-in;
+    transform:  translateY(4px);
+    opacity:    0;
+  }
+
+  .entry {
+    transform: none;
+    opacity:   1;
+  }
+
+  .delay-1 {
+    transition-delay: 0.05s;
+  }
+
+  .delay-2 {
+    transition-delay: 0.1s;
+  }
+
+  .delay-3 {
+    transition-delay: 0.15s
+  }
+
+  .delay-4 {
+    transition-delay: 0.2s;
+  }
+
+  .hide {    
+    transform: translateY(4px);
+    opacity:   0;
+  }
+
+</style>
+
+
+<div class$="controls [[__computeSearch(search)]]"> 
+  <div id="background"></div>
+  <div class$="condition-btn-and-price [[__computeSearch(search)]]">
+    <div class$="condition-btn-wrapper inline-vertical-center [[__computeSearch(search)]]" 
+         on-click="__conditionButtonClicked">
+      <paper-icon-button id="conditionBtn" 
+                         class="delay-1 entry slide-up" 
+                         icon="asg-icons:condition">
+      </paper-icon-button>
+      <span id="conditionText" 
+            class$="delay-2 entry slide-up icon-text [[__computeSearch(search)]]">
+        [[_condition]]
+      </span>
+      <paper-ripple></paper-ripple>
+    </div>
+    <span id="price"
+          class$="price inline-vertical-center hide-transition heading 
+          delay-4 entry slide-up
+          [[__computeSearch(search)]]
+          [[__computePriceDisabledClass(_availableQuantity)]] 
+          [[__computePriceHideClass(_conditionPrice)]]">
+      [[_conditionPrice]]
+    </span>
+  </div>
+
+  <div class$="qty-wrapper [[__computeSearch(search)]]">    
+    <div id="qtyNotAvail" 
+         class="disabled delay-2 entry slide-up"
+         hidden="[[!__computeInputHideClass(_availableQuantity, _conditionPrice)]]">
+      [[__computeNotAvailableWording(card, _condition, _foilChecked)]]
+    </div>
+    <div class$="qty-input-container hide-transition [[__computeInputHideClass(_availableQuantity, _conditionPrice)]]">
+      <paper-icon-button id="qtyBtn" 
+                         class="delay-2 entry slide-up" 
+                         icon="asg-icons:qty" 
+                         on-click="__setFocusOnQtyInput">
+      </paper-icon-button>
+      <paper-input id="qty"
+                   class$="qty delay-3 entry slide-up [[__computeSearch(search)]]"
+                   allowed-pattern="[0-9]"
+                   auto-validate
+                   disabled="[[_inputDisabled]]"
+                   min="1"
+                   max="[[_availableQuantity]]"
+                   maxlength="3"
+                   tabindex="0"
+                   type="tel"
+                   on-change="__qtyInputChanged"
+                   value="[[__computeQtyVal(card, _quantity)]]">      
+      </paper-input>
+      <div id="qtyText" class="delay-4 entry slide-up">
+        of [[_availableQuantity]] Avail
+      </div>
+    </div>
+  </div>
+
+  <paper-toggle-button id="foilBtn"
+                       class$="foilToggle delay-3 entry slide-up [[__computeSearch(search)]]"
+                       on-checked-changed="__foilToggleChanged">
+    <span id="foilText" class="delay-4 entry slide-up">Foil</span>
+  </paper-toggle-button>
+
+  <asg-shop-condition-selector id="condition"
+                               card="[[card]]" 
+                               foil="[[_foilChecked]]"
+                               from="[[selectorFrom]]"
+                               selected="[[_condition]]">
+  </asg-shop-condition-selector>
+
+</div>
+      
