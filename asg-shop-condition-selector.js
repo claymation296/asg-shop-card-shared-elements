@@ -1,6 +1,6 @@
 /**
  * `asg-shop-condition-selector`
- * 
+ * select card grade
  *
  * @customElement
  * @polymer
