@@ -36,7 +36,7 @@
   .condition-btn-and-price {
     display:         flex;
     justify-content: space-between;
-    align-content:   center;
+    align-items:     center;
     padding-bottom:  8px;
   }
 
@@ -47,8 +47,8 @@
 
   .price {
     background-color: white;
-    border-radius:    20px;
-    padding:          5px;
+    border-radius:    24px;
+    padding:          8px;
     transition-delay: 0.05s;
   }
 
@@ -93,10 +93,6 @@
   .hide-transition {    
     transition: transform 0.3s var(--spriteful-ease, ease-out), opacity 0.2s ease-in;
     opacity:    1;
-  }
-
-  .disabled {
-    opacity: 0.5;
   }
 
   .qty-input-container {
@@ -225,6 +221,10 @@
     transition-delay: 0.2s;
   }
 
+  .disabled {
+    opacity: 0.5;
+  }
+
   .hide {    
     transform: translateY(4px);
     opacity:   0;
@@ -239,39 +239,40 @@
     <div class$="condition-btn-wrapper inline-vertical-center [[__computeSearch(search)]]" 
          on-click="__conditionButtonClicked">
       <paper-icon-button id="conditionBtn" 
-                         class="delay-1 entry slide-up" 
+                         class="delay-1 slide-up" 
                          icon="asg-icons:condition">
       </paper-icon-button>
       <span id="conditionText" 
-            class$="delay-2 entry slide-up icon-text [[__computeSearch(search)]]">
+            class$="delay-2 slide-up icon-text [[__computeSearch(search)]]">
         [[_condition]]
       </span>
       <paper-ripple></paper-ripple>
     </div>
     <span id="price"
           class$="price inline-vertical-center hide-transition heading 
-          delay-4 entry slide-up
-          [[__computeSearch(search)]]
-          [[__computePriceDisabledClass(_availableQuantity)]] 
+          delay-4 slide-up
+          [[__computeSearch(search)]]           
           [[__computePriceHideClass(_conditionPrice)]]">
-      [[_conditionPrice]]
+      <span class$="[[__computePriceDisabledClass(_availableQuantity)]]">
+       [[_conditionPrice]]
+      </span>
     </span>
   </div>
 
   <div class$="qty-wrapper [[__computeSearch(search)]]">    
     <div id="qtyNotAvail" 
-         class="disabled delay-2 entry slide-up"
+         class="disabled delay-2 slide-up"
          hidden="[[!__computeInputHideClass(_availableQuantity, _conditionPrice)]]">
       [[__computeNotAvailableWording(card, _condition, _foilChecked)]]
     </div>
     <div class$="qty-input-container hide-transition [[__computeInputHideClass(_availableQuantity, _conditionPrice)]]">
       <paper-icon-button id="qtyBtn" 
-                         class="delay-2 entry slide-up" 
+                         class="delay-2 slide-up" 
                          icon="asg-icons:qty" 
                          on-click="__setFocusOnQtyInput">
       </paper-icon-button>
       <paper-input id="qty"
-                   class$="qty delay-3 entry slide-up [[__computeSearch(search)]]"
+                   class$="qty delay-3 slide-up [[__computeSearch(search)]]"
                    allowed-pattern="[0-9]"
                    auto-validate
                    disabled="[[_inputDisabled]]"
@@ -283,16 +284,16 @@
                    on-change="__qtyInputChanged"
                    value="[[__computeQtyVal(card, _quantity)]]">      
       </paper-input>
-      <div id="qtyText" class="delay-4 entry slide-up">
+      <div id="qtyText" class="delay-4 slide-up">
         of [[_availableQuantity]] Avail
       </div>
     </div>
   </div>
 
   <paper-toggle-button id="foilBtn"
-                       class$="foilToggle delay-3 entry slide-up [[__computeSearch(search)]]"
+                       class$="foilToggle delay-3 slide-up [[__computeSearch(search)]]"
                        on-checked-changed="__foilToggleChanged">
-    <span id="foilText" class="delay-4 entry slide-up">Foil</span>
+    <span id="foilText" class="delay-4 slide-up">Foil</span>
   </paper-toggle-button>
 
   <asg-shop-condition-selector id="condition"
