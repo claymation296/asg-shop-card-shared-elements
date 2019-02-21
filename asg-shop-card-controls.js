@@ -45,8 +45,10 @@ const format = (num, qty) =>
   (Number(num) * Math.max(1, qty)).toFixed(2);
 
 const displayedPrice = ({price, sale}, qty) => {
-  const displayed = sale && sale !== '0' ? sale : price;  
-  return displayed ? `$ ${format(displayed, qty)}` : '';
+  const displayed = sale && sale !== '0' ? sale : price; 
+  // 'No Price' string must be as short as possilbe to
+  // avoid breaking condition selector styles on very small screens
+  return displayed ? `$ ${format(displayed, qty)}` : 'No Price'; 
 };
 
 
@@ -121,6 +123,9 @@ class ASGShopCardControls extends SpritefulElement {
       'asg-shop-condition-selector-selected', 
       this.__conditionSelectedChanged.bind(this)
     );
+    // one time setup since the __computePriceHideClass
+    // sets this class before first entry animation should take place
+    this.$.price.classList.remove('entry');
   }
 
   // adds search classes for asg-shop-card-item 
@@ -201,7 +206,7 @@ class ASGShopCardControls extends SpritefulElement {
 
 
   __computePriceHideClass(price) {
-    return price && price !== '0' ? '' : 'hide';
+    return price && price !== '0' && price !== 'No Price' ? 'entry' : 'hide';
   }
 
 
