@@ -36,6 +36,7 @@ export const AsgShopCardMixin = superClass => {
 	      '__cardPaletteChanged(card.palette, card.card_faces, _face)'
 	    ];
 	  }
+
 	  
     __cardPaletteChanged(palette, faces, face) {
 	    if (!palette && !faces) { return; }
@@ -51,6 +52,7 @@ export const AsgShopCardMixin = superClass => {
 	      });
 	      return;
 	    }
+	    
 	    const {
 	      DarkMuted,
 	      DarkVibrant,
@@ -78,6 +80,7 @@ export const AsgShopCardMixin = superClass => {
 	      '--vibrant-color':             Vibrant      ? Vibrant.hex        : '',
 	      '--vibrant-title-color':       Vibrant      ? Vibrant.title      : ''
 	    };
+
 	    const getSafariClearRgb = () => {
 	      if (LightVibrant) {
 	        return LightVibrant.rgb;
@@ -87,11 +90,11 @@ export const AsgShopCardMixin = superClass => {
 	      }
 	      return [];
 	    };
+
 	    const [r, g, b] = getSafariClearRgb();
 	    dictionary['--safari-clear'] = r ? `rgba(${r}, ${g}, ${b}, 0)` : '';    
 	    this.updateStyles(dictionary);
 	  }
-
 
   };
 };

@@ -180,6 +180,11 @@
   resolved "https://registry.yarnpkg.com/@spriteful/lambda/-/lambda-1.3.3.tgz#0a0f553c95da4a392a9d97fb1f5daf4544ef1da9"
   integrity sha512-q1wIoJtozKSNaMT4DSxqd6gHv3z6sRlTrx+nUnltHLwYRMIS/zuzaPgktQ0e2PARQnZ2MG8jTDXcOnjvHKYK1A==
 
+"@spriteful/lambda@^1.3.4":
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/@spriteful/lambda/-/lambda-1.3.4.tgz#1f2110ee41e39f3b19f1e64b7acc689c7930a783"
+  integrity sha512-+o9/2iq6wA1E4DlUPKUeH9GS7ow3uP/w2bHs4vN8aZlr+e+a3G9sppjl55eIZBCNMQOi9756beGyO0VgU3fcxQ==
+
 "@spriteful/services@^2.1.3":
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/@spriteful/services/-/services-2.1.3.tgz#746f9ae667fe9ff2476ee02feafb8ed66651b05f"
@@ -212,6 +217,13 @@
   integrity sha512-MlyhtqE1r30GcNkbwI2A8+CGlZ94nrFVfKzOma9ygP/J77R0rV67A42WMvmLpaXReQ2Z7IwQiN74IPBFkN3CFw==
   dependencies:
     "@spriteful/lambda" "^1.3.3"
+
+"@spriteful/utils@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@spriteful/utils/-/utils-1.2.1.tgz#2a3378c9f6a4b471bdd1f49a456000b9a667f8f5"
+  integrity sha512-t7UM/WAr2Rfq7bfoLgAsyx6hGaToUwFceIXrEmQ/ODF+sUb5A26fcKlGD++YO7hASwqH5D3caBF1q9mTSVTtug==
+  dependencies:
+    "@spriteful/lambda" "^1.3.4"
 
 "@spriteful/worker@^3.0.2":
   version "3.0.2"
