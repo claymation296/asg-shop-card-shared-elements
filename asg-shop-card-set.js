@@ -17,6 +17,7 @@ import {
   join,
   map
 }                 from '@spriteful/lambda/lambda.js';
+import {schedule} from '@spriteful/utils/utils.js';
 import htmlString from './asg-shop-card-set.html';
 import services   from '@spriteful/services/services.js';
 import './asg-set-icons.js';
@@ -90,8 +91,9 @@ class ASGShopCardSet extends SpritefulElement {
   }
   // called by asg-shop-card-detail open method
   // must manually center each icon because they were all generated
-  // by a program that left justifies each one
-  centerIcon() {
+  // by a program that left-justifies each one
+  async centerIcon() {    
+    await schedule();
     const svg = this.select('svg', this.$.setIcon);
     if (!svg) {
       this._hideIronIcon = true;
@@ -108,11 +110,13 @@ class ASGShopCardSet extends SpritefulElement {
     }
     const g             = svg.firstElementChild;
     const {width}       = g.getBoundingClientRect();
+    this._hideIronIcon  = false;
+    // sometimes measurements fail even after the schedule
+    if (width === 0) { return; } 
     const svgCenter     = 12; // svg is 24px wide
     const gCenter       = width / 2; // g can be less than full width
     const centered      = svgCenter - gCenter;
-    svg.style.transform = `translateX(${centered}px)`;
-    this._hideIronIcon  = false;
+    svg.style.transform = `translateX(${centered}px)`;    
   }
 
 }

@@ -185,6 +185,11 @@
   resolved "https://registry.yarnpkg.com/@spriteful/lambda/-/lambda-1.3.4.tgz#1f2110ee41e39f3b19f1e64b7acc689c7930a783"
   integrity sha512-+o9/2iq6wA1E4DlUPKUeH9GS7ow3uP/w2bHs4vN8aZlr+e+a3G9sppjl55eIZBCNMQOi9756beGyO0VgU3fcxQ==
 
+"@spriteful/lambda@^1.3.5":
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/@spriteful/lambda/-/lambda-1.3.5.tgz#14cef52aff8144ab1af6cdd500debb8daddf4564"
+  integrity sha512-e3lnmVRce1bO6Ygw3V+rmKZGog2+OyEJYmC9h/p0vO63Y8alqY+VFbowkvYl7PJUCo+AlqLm9GrdPbAQTn+KrQ==
+
 "@spriteful/services@^2.1.3":
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/@spriteful/services/-/services-2.1.3.tgz#746f9ae667fe9ff2476ee02feafb8ed66651b05f"
