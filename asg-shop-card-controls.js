@@ -25,7 +25,6 @@ import {
   SpritefulElement, 
   html
 }                 from '@spriteful/spriteful-element/spriteful-element.js';
-
 import {
   listen, 
   schedule, 
@@ -143,16 +142,16 @@ class ASGShopCardControls extends SpritefulElement {
       'Moderately Played': mp, 
       'Heavily Played': hp
     } = card[isFoil];
-    if (Number(nm.qty) && nm.available != 0) {
+    if (Number(nm.qty) && Number(nm.available)) {
       return 'Near Mint';
     }
-    if (Number(lp.qty) && lp.available != 0) {
+    if (Number(lp.qty) && Number(lp.available)) {
       return 'Lightly Played';
     }
-    if (Number(mp.qty) && mp.available != 0) {
+    if (Number(mp.qty) && Number(mp.available)) {
       return 'Moderately Played';
     }
-    if (Number(hp.qty) && hp.available != 0) {
+    if (Number(hp.qty) && Number(hp.available)) {
       return 'Heavily Played';
     }
     return 'Near Mint';
@@ -242,7 +241,7 @@ class ASGShopCardControls extends SpritefulElement {
 
 
   __priceChanged(price) {
-    if(!price) { return; }
+    if (!price) { return; }
     this.fire('open-asg-shop-card-details-fab');
   }
 

@@ -20,7 +20,7 @@
     "@polymer/iron-icon": "^3.0.1",
     "@polymer/iron-iconset-svg": "^3.0.1",
     "@polymer/iron-selector": "^3.0.1",
-    "@spriteful/lambda": "^1.3.4",
+    "@spriteful/lambda": "^1.3.5",
     "@spriteful/services": "^2.1.3",
     "@spriteful/spriteful-element": "^1.0.4",
     "@spriteful/utils": "^1.2.1"
