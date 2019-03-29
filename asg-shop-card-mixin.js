@@ -85,14 +85,16 @@ export const AsgShopCardMixin = superClass => {
 	      if (LightVibrant) {
 	        return LightVibrant.rgb;
 	      } 
-	      if(LightMuted) {
+	      if (LightMuted) {
 	        return LightMuted.rgb;
 	      }
 	      return [];
 	    };
 
 	    const [r, g, b] = getSafariClearRgb();
-	    dictionary['--safari-clear'] = r ? `rgba(${r}, ${g}, ${b}, 0)` : '';    
+	    // rgb values MUST be ints for safari
+	    dictionary['--safari-clear'] = r ? 
+	    	`rgba(${r.toFixed()}, ${g.toFixed()}, ${b.toFixed()}, 0)` : '';
 	    this.updateStyles(dictionary);
 	  }
 
