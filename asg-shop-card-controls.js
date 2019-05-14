@@ -142,16 +142,16 @@ class ASGShopCardControls extends SpritefulElement {
       'Moderately Played': mp, 
       'Heavily Played': hp
     } = card[isFoil];
-    if (Number(nm.qty) && Number(nm.available)) {
+    if (Number(nm.qty)) {
       return 'Near Mint';
     }
-    if (Number(lp.qty) && Number(lp.available)) {
+    if (Number(lp.qty)) {
       return 'Lightly Played';
     }
-    if (Number(mp.qty) && Number(mp.available)) {
+    if (Number(mp.qty)) {
       return 'Moderately Played';
     }
-    if (Number(hp.qty) && Number(hp.available)) {
+    if (Number(hp.qty)) {
       return 'Heavily Played';
     }
     return 'Near Mint';
