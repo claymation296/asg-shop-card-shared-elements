@@ -44,7 +44,36 @@ class ASGShopCardSet extends SpritefulElement {
 
       _setIcon: {
         type: String,
-        computed: '__computeSetIcon(card.set)'
+        computed: '__computeSetIcon(card)'
+      },
+
+      _knownNoIcon: {
+        type: Object,
+        value: {
+          'asg-set-icons:4bb':  true, //4th black border
+          'asg-set-icons:fbb':  true, //foreign black border
+          'asg-set-icons:ptc':  true, //pro tour
+          'asg-set-icons:wc97': true, 
+          'asg-set-icons:wc98': true, 
+          'asg-set-icons:wc99': true,
+          'asg-set-icons:wc00': true,
+          'asg-set-icons:wc01': true,
+          'asg-set-icons:wc02': true,
+          'asg-set-icons:wc03': true,
+          'asg-set-icons:wc04': true,
+          'asg-set-icons:pcel':  true, //Celebration Cards 
+          'asg-set-icons:rqs':  true, //rival quick start
+          'asg-set-icons:gk1':  true, //RNA Guild Kit
+          'asg-set-icons:gk2':  true, //RNA Guild Kit
+          'asg-set-icons:l12':  true, //League Tokens 2012
+          'asg-set-icons:l13':  true, //League Tokens 2013
+          'asg-set-icons:l14':  true, //League Tokens 2014
+          'asg-set-icons:l15':  true, //League Tokens 2015
+          'asg-set-icons:l16':  true, //League Tokens 2016
+          'asg-set-icons:l17':  true, //League Tokens 2017
+          'asg-set-icons:ovnt': true, //Vintage Championship
+          'asg-set-icons:hho':  true //Happy Holidays
+        }
       },
 
       isWhite: {
@@ -62,11 +91,20 @@ class ASGShopCardSet extends SpritefulElement {
   }
 
 
-  __computeSetIcon(set) {
+  __computeSetIcon(card) {
+    if (!card) { return ''; }
+    const {set, layout, promo} = card;
     if (!set) { return ''; }
+    const isToken = layout.includes('token');
+    if (promo || isToken) {
+      const [firstLetter, ...rest] = set.split('');
+      if (firstLetter === 'p' || firstLetter === 't') {
+        const newSet = rest.join('');
+        return `asg-set-icons:${newSet}`;
+      }
+    }
     return `asg-set-icons:${set}`;
   }
-
 
   __computeRarityColor(rarity, isWhite) {
     if (!rarity || !isWhite) { return ''; }
@@ -97,6 +135,8 @@ class ASGShopCardSet extends SpritefulElement {
     const svg = this.select('svg', this.$.setIcon);
     if (!svg) {
       this._hideIronIcon = true;
+      const dontWarn = this._knownNoIcon[this._setIcon];
+      if (dontWarn || this.card.promo) { return; }
       console.warn('asg-shop-card-set no set found for: ', this._setIcon);
       // track missing icons
       // maybe can fill them in if its only a handful
