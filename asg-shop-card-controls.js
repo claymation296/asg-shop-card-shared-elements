@@ -90,6 +90,12 @@ class ASGShopCardControls extends SpritefulElement {
         type: Boolean,
         value: false
       },
+      // true if there are only foil cards available
+      _initialFoilChecked: {
+        type: Boolean,
+        value: false,
+        computed: '__computeInitialFoilChecked(card)'
+      },
 
       _quantity: {
         type: Number,
@@ -109,7 +115,8 @@ class ASGShopCardControls extends SpritefulElement {
     return [
       '__priceChanged(_conditionPrice)',
       '__inputDisabledChanged(_inputDisabled)',
-      '__cardChanged(card)'
+      '__cardChanged(card)',
+      '__initialFoilCheckedChanged(_initialFoilChecked)'
     ];
   }
 
@@ -225,6 +232,19 @@ class ASGShopCardControls extends SpritefulElement {
     const {qty, available} = card[isFoil][condition];
     return available === 0 && qty > 0 ? 'All Available In Cart' : 'Not Available'; 
   }
+  // one time initialization of toogle button state
+  // show user foil pricing/qtys if there are no standard
+  // cards available but foil cards are available
+  __computeInitialFoilChecked(card) {
+    if (!card) { return false; }
+    const {foil, notFoil} = card;
+    const standardVals    = Object.values(notFoil);
+    const standardHasQtys = standardVals.some(obj => Number(obj.qty) > 0);
+    if (standardHasQtys) { return false; }
+    const foilVals   = Object.values(foil);
+    const foilHasQty = foilVals.some(obj => Number(obj.qty) > 0);
+    return foilHasQty;
+  }
   // fixes a bug where the description will not be displayed
   // if a card is removed from cart, listener in asg-shop-card-item
   __cardChanged(card) {
@@ -243,6 +263,13 @@ class ASGShopCardControls extends SpritefulElement {
   __priceChanged(price) {
     if (!price) { return; }
     this.fire('open-asg-shop-card-details-fab');
+  }
+  // toggle to foil pricing/qtys if no standard cards
+  // are in stock but foils are
+  __initialFoilCheckedChanged(checked) {
+    if (checked) {
+      this._foilChecked = true;
+    }
   }
 
 
