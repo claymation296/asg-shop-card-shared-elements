@@ -60,7 +60,12 @@ class ASGShopCardControls extends SpritefulElement {
 
 
   static get properties() {
-    return {     
+    return {
+
+      buylist: {
+        type: Boolean,
+        value: false
+      },      
 
       card: Object,
       //for computing search for classes
@@ -185,6 +190,7 @@ class ASGShopCardControls extends SpritefulElement {
 
 
   __computeAvailQty(condition, nonFoilConditions, foilConditions, foil) {
+    if (this.buylist) { return 99; } 
     if (!condition) { return 0; }
     const getQty = ({available, qty}) => {
       if (typeof available === 'number') {
@@ -237,6 +243,7 @@ class ASGShopCardControls extends SpritefulElement {
   // cards available but foil cards are available
   __computeInitialFoilChecked(card) {
     if (!card) { return false; }
+    if (!card.nonfoil) { return true; }
     const {foil, notFoil} = card;
     const standardVals    = Object.values(notFoil);
     const standardHasQtys = standardVals.some(obj => Number(obj.qty) > 0);
