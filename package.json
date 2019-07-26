@@ -1,6 +1,6 @@
 {
   "name": "@spriteful/asg-shop-card-shared-elements",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "Web Components that are shared by asg-shop-card-item, asg-shop-card-detail and asg-shop-card-large",
   "main": "index.js",
   "scripts": {
