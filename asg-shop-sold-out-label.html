@@ -1,0 +1,44 @@
+
+<style>
+	
+	:host {
+		display: 				 none;
+    justify-content: center;
+    align-items: 		 flex-end;
+    position: 			 absolute;
+    top: 						 0px;
+    right: 					 0px;
+    border-radius: 	 8px;
+    overflow: 			 hidden;
+    height: 				 96px;
+    width: 					 96px;
+    pointer-events:  none;
+    z-index: 				 1; /* above all animations/effects */
+	}
+
+	:host[hidden] {
+		display: none;
+	}
+
+	#label {
+		display: 				  flex;
+    align-items: 		  flex-end;
+    justify-content:  center;
+    position: 			  relative;
+    bottom: 				  64px;
+    left: 					  16px;
+    height: 				  100%;
+    width: 					  100%;
+		font-size: 			  14px;
+    transform-origin: bottom;
+    transform: 				rotate(45deg);
+    background-color: var(--app-light-color);
+    color: 						var(--constant-dark-text, black);
+	}
+
+</style>
+
+
+<div id="label">
+	Sold Out
+</div>

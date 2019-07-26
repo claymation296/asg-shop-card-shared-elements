@@ -154,16 +154,16 @@ class ASGShopCardControls extends SpritefulElement {
       'Moderately Played': mp, 
       'Heavily Played': hp
     } = card[isFoil];
-    if (Number(nm.qty)) {
+    if (Number(nm.qty) > 0) {
       return 'Near Mint';
     }
-    if (Number(lp.qty)) {
+    if (Number(lp.qty) > 0) {
       return 'Lightly Played';
     }
-    if (Number(mp.qty)) {
+    if (Number(mp.qty) > 0) {
       return 'Moderately Played';
     }
-    if (Number(hp.qty)) {
+    if (Number(hp.qty) > 0) {
       return 'Heavily Played';
     }
     return 'Near Mint';
@@ -183,9 +183,9 @@ class ASGShopCardControls extends SpritefulElement {
 
   __computeQtyVal(card, quantity = 0) {
     if (!card || !card.selected) { 
-      return quantity ? quantity : 1; 
+      return quantity > 0 ? quantity : 1; 
     }
-    return quantity ? quantity : card.selected.qty;
+    return quantity > 0 ? quantity : card.selected.qty;
   }
 
 
@@ -196,7 +196,7 @@ class ASGShopCardControls extends SpritefulElement {
       if (typeof available === 'number') {
         return available;
       }
-      return qty ? Number(qty) : 0;
+      return Number(qty) > 0 ? Number(qty) : 0;
     };
     if (foil) {
       if (!foilConditions) { return 0; }
@@ -236,7 +236,7 @@ class ASGShopCardControls extends SpritefulElement {
     if (!card) { return; }
     const isFoil           = foilChecked ? 'foil' : 'notFoil';
     const {qty, available} = card[isFoil][condition];
-    return available === 0 && qty > 0 ? 'All Available In Cart' : 'Not Available'; 
+    return available === 0 && qty > 0 ? 'All Available In Cart' : 'Sold Out'; 
   }
   // one time initialization of toogle button state
   // show user foil pricing/qtys if there are no standard
